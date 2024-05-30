@@ -1,0 +1,45 @@
+* {
+    font-family: Poppins;
+    font-size: 1rem;
+    color: black;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #031b3d;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    padding: 5%;
+}
+
+/*-----------------[]-----------------*/
+
+.graph_container {
+    margin: 0;
+    padding-bottom: 10%;
+    height: fit-content;
+}
+
+.graph_container > a {
+    grid-column-start: 1;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    font-size: smaller;
+}
+
+.graph_container > canvas {
+    grid-row-start: 1;
+    grid-row-end: 5;
+    grid-column-start: 2;
+    background-color: #031b3d;
+    color: white;
+    height: 100%;
+}
+
+.current_page{
+    background-color: #061a35;
+}

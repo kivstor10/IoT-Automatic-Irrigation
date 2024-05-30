@@ -7,21 +7,22 @@ const WebSocket = require('ws'); // Import WebSocket
 const emitter = new EventEmitter();
 let formattedData = [[0, 0, 0, 0, 0]];
 
+
 function formatReceivedData(dataBuffer) {
-    const formattedData = [];
-    let temp = [];
-    let count = 0;
-    for (let i = 0; i < dataBuffer.length; i += 4) { // Read floats (4 bytes each)
-        const floatValue = dataBuffer.readFloatLE(i); // Assuming little-endian encoding
-        const roundedValue = parseFloat(floatValue.toFixed(2)); // Round to 2 decimal places
-        temp.push(roundedValue);
-        count++;
-        if (count === 5) {
-            formattedData.push(temp);
-            break; // Exit the loop after pushing 5 elements
-        }
-    }
-    return formattedData;
+    // const formattedData = [];
+    // let temp = [];
+    // let count = 0;
+    // for (let i = 0; i < dataBuffer.length; i += 4) { // Read floats (4 bytes each)
+    //     const floatValue = dataBuffer.readFloatLE(i); // Assuming little-endian encoding
+    //     const roundedValue = parseFloat(floatValue.toFixed(2)); // Round to 2 decimal places
+    //     temp.push(roundedValue);
+    //     count++;
+    //     if (count === 5) {
+    //         formattedData.push(temp);
+    //         break; // Exit the loop after pushing 5 elements
+    //     }
+    // }
+    // return formattedData;
 }
 
 

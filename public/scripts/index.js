@@ -2,17 +2,14 @@
 
 document.addEventListener("DOMContentLoaded", function() {
     // Get references to each canvas element
-    const canvas1 = document.getElementById('CO2_Graph_Canvas');
-    const canvas2 = document.getElementById('ParticulateMatter_Graph_Canvas');
-    const canvas3 = document.getElementById('Humidity_Graph_Canvas');
-    const canvas4 = document.getElementById('CO_Graph_Canvas');
-    const canvas5 = document.getElementById('Temperature_Graph_Canvas');
+    const canvas1 = document.getElementById('Forecasted_Downfall_Canvas');
+    const canvas2 = document.getElementById('Soil_Moisture_Canvas');
 
     // Define data for each graph
     const data1 = {
         labels: [],
         datasets: [{
-            label: 'Carbon Monoxide (ppm)',
+            label: 'Forecasted Downfall (units)',
             data: [],
             borderWidth: 5,
             borderColor: '#0094FF', // Set line color to blue
@@ -23,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const data2 = {
         labels: [],
         datasets: [{
-            label: 'Temperature (°C)',
+            label: 'Soil Moisture (Units)',
             data: [0],
             borderWidth: 5,
             borderColor: 'red', // Set line color to red
@@ -31,38 +28,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }]
     };
 
-    const data3 = {
-        labels: [],
-        datasets: [{
-            label: 'Humidity (%)',
-            data: [],
-            borderWidth: 5,
-            borderColor: 'orange', // Set line color to orange
-            fill: true,
-        }]
-    };
-
-    const data4 = {
-      labels: [],
-      datasets: [{
-          label: 'Carbon Dioxide (ppm)',
-          data: [],
-          borderWidth: 5,
-          borderColor: 'purple', // Set line color to orange
-          fill: true,
-      }]
-    };
-
-    const data5 = {
-        labels: [],
-        datasets: [{
-            label: 'Air Particulate Matter (µg/m³)',
-            data: [],
-            borderWidth: 5,
-            borderColor: 'green', // Set line color to orange
-            fill: true,
-        }]
-      };
 
     // Create a separate line chart for each canvas element
     const chart1 = new Chart(canvas1, {
@@ -110,75 +75,6 @@ document.addEventListener("DOMContentLoaded", function() {
             },
           }
         });
-
-
-    const chart3 = new Chart(canvas3, {
-        type: 'line',
-        data: data3,
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        color: '#061a35',
-                        lineWidth: 3,
-                    }
-                }
-            },
-            plugins: {
-              legend: {
-                labels: {
-                  boxWidth: 0
-                }
-              }
-            },
-        }
-    });
-
-    const chart4 = new Chart(canvas4, {
-      type: 'line',
-      data: data4,
-      options: {
-          scales: {
-              y: {
-                  beginAtZero: true,
-                  grid: {
-                      color: '#061a35',
-                      lineWidth: 3,
-                  }
-              }
-          },
-          plugins: {
-            legend: {
-              labels: {
-                boxWidth: 0
-              }
-            }
-          },
-      }
-  });
-
-  const chart5 = new Chart(canvas5, {
-    type: 'line',
-    data: data5,
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true,
-                grid: {
-                    color: '#061a35',
-                    lineWidth: 3,
-                }
-            }
-        },
-        plugins: {
-          legend: {
-            labels: {
-              boxWidth: 0
-            }
-          }
-        },
-    }
 });
 
     // Function to update chart data
@@ -230,10 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
           if (innerData.length === 5) {
               // Update each chart with corresponding data
               updateChartData(chart1, [innerData[3]]); 
-              updateChartData(chart2, [innerData[4]]); 
-              updateChartData(chart3, [innerData[2]]); 
-              updateChartData(chart4, [innerData[0]]); 
-              updateChartData(chart5, [innerData[1]]);       
+              updateChartData(chart2, [innerData[4]]);       
           } else {
               console.error('Received invalid data:', innerData);
           }

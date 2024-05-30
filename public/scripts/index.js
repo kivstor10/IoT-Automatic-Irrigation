@@ -7,10 +7,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Define data for each graph
     const data1 = {
-        labels: [],
+        labels: [""],
         datasets: [{
             label: 'Forecasted Downfall (units)',
-            data: [],
+            data: ["Initial"],
             borderWidth: 5,
             borderColor: '#0094FF', // Set line color to blue
             fill: true,
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
         labels: [],
         datasets: [{
             label: 'Soil Moisture (Units)',
-            data: [0],
+            data: [['Initial']],
             borderWidth: 5,
             borderColor: 'red', // Set line color to red
             fill: true,

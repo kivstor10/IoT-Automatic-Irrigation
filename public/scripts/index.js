@@ -7,10 +7,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Define data for each graph
     const data1 = {
-        labels: [""],
+        labels: ["Initial"],
         datasets: [{
             label: 'Forecasted Downfall (units)',
-            data: ["Initial"],
+            data: [0],
             borderWidth: 5,
             borderColor: '#0094FF', // Set line color to blue
             fill: true,
@@ -18,10 +18,10 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     const data2 = {
-        labels: [],
+        labels: ["Initial"],
         datasets: [{
             label: 'Soil Moisture (Units)',
-            data: [['Initial']],
+            data: [0],
             borderWidth: 5,
             borderColor: 'red', // Set line color to red
             fill: true,
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // Remove the first element from the data array
             chart.data.labels.shift();
             chart.data.datasets.forEach(dataset => {
-                dataset.data.shift(); // Remove the first element from each dataset
+                datasetx.data.shift(); // Remove the first element from each dataset
             });
         }
     
@@ -145,4 +145,4 @@ document.addEventListener("DOMContentLoaded", function() {
         updateCharts(eventData || [0, 0, 0, 0]); // Default to an array with three zeros if eventData is null or undefined
     };
 
-}); 
+

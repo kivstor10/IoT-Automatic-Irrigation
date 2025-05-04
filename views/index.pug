@@ -1,0 +1,130 @@
+extends layout
+
+block content
+  header
+    img(src='/images/svgs/Pump.svg', alt='Pump')
+    h1=title
+    a(href="#")
+      img(src='/images/svgs/Translate App.svg', alt='Pump')
+    h2#currentTime 00:00
+
+  div.onOffControl
+    img(src='/images/svgs/Pump.svg', alt='Pump')
+    h4 Pump 1
+    h4 Pump 2
+    h4 Pump 3
+    button(onclick="sendCommand('START_PUMP_1')") Start Pump 1
+    //- button(onclick="sendCommand('STOP_PUMP_1')") Stop Pump 1
+    button(onclick="sendCommand('START_PUMP_2')") Start Pump 2
+    //- button(onclick="sendCommand('STOP_PUMP_2')") Stop Pump 2
+    button(onclick="sendCommand('START_PUMP_3')") Start Pump 3
+    //- button(onclick="sendCommand('STOP_PUMP_3')") Stop Pump 3
+
+  div.vegSelection 
+    h3 Crop 1
+    div.selectedVegContainer
+      div.selectedVeg 
+        img(src='/images/svgs/Eggplant.svg' alt='Aubergine')
+      input(placeholder="Aubergine")
+      a(href="#")
+        img(src='/images/svgs/Settings.svg' alt='Settings')
+
+    h3 Crop 2  
+    div.selectedVegContainer
+      div.selectedVeg 
+        img(src='/images/svgs/Grains Of Rice.svg' alt='Rice')
+      input(placeholder="Rice")
+      a(href="#")
+        img(src='/images/svgs/Settings.svg' alt='Settings')
+
+    h3 Crop 3
+    div.selectedVegContainer
+      div.selectedVeg 
+        img(src='/images/svgs/Peas.svg' alt='Peas')
+      input(placeholder="Peas")
+      a(href="#")
+        img(src='/images/svgs/Settings.svg' alt='Settings')
+
+    h3 New Crop
+    div.selectedVegContainer
+      a
+        img(src='/images/svgs/Plus Math.svg', alt='Plus')
+
+  div.graph
+    h1 Rain Forecast
+    canvas(id="weatherChart" width="800" height="400")
+    script.
+      document.addEventListener('DOMContentLoaded', async function() {
+        const weatherData = !{JSON.stringify(weatherData)};
+        const rainEvents = !{JSON.stringify(rainEvents)};
+
+        if (!weatherData) {
+          console.error('Weather data not available');
+          return;
+        }
+
+        const ctx = document.getElementById('weatherChart').getContext('2d');
+        const labels = weatherData.map(data => data.time);
+        const rainChances = weatherData.map(data => data.rainChance);
+        const rainAmounts = weatherData.map(data => data.rainAmount);
+
+        // Determine maximum y-axis value
+        const maxRainValue = Math.max(...rainChances, ...rainAmounts);
+
+        // Create an array to mark rain event occurrences
+        const rainEventIndices = labels.map(label => rainEvents.find(event => event.time === label) ? maxRainValue : 0);
+
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Rain Chance (%)',
+              data: rainChances,
+              backgroundColor: 'rgba(75, 192, 192, 0.2)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+            }, {
+              label: 'Rain Amount (mm/h)',
+              data: rainAmounts,
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 1)',
+              borderWidth: 1
+            }, {
+              label: 'Rain Events',
+              data: rainEventIndices,
+              borderColor: 'rgba(54, 162, 235, 0)',
+              backgroundColor: 'rgba(54, 162, 235, 0.3)',
+              fill: true
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+                suggestedMax: maxRainValue + 10 // Add a buffer to the maximum value
+              }
+            }
+          }
+        });
+      });
+
+  // Display sensor and weather data
+  //- h2 Data obtained from database:
+  //- if sensors && sensors.length 
+  //-   ul 
+  //-     each sensor in sensors 
+  //-       li #{sensor.sensorType}: #{sensor.value} at #{sensor.timestamp}
+  //- else 
+  //-   p No sensor data available.
+
+  //- h2 Weather log (working with weather API)
+  //- if weatherData
+  //-   ul 
+  //-     each data in weatherData
+  //-       li (#{data.time}) 
+  //-         ul 
+  //-           li Precipitation: #{data.rainAmount}mm/h 
+  //-           li Probability of precipitation: #{data.rainChance}%
+  //- else 
+  //-   p No sensor data available.

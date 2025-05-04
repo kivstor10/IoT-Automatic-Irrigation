@@ -37,8 +37,8 @@ The system sends UDP commands through an ESP connection to an external Arduino h
 ## Setup and Installation
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/robinrai1349/smart_irrigation_app.git
-   cd smart_irrigation_app
+   git clone https://github.com/kivstor10/IoT-Automatic-Irrigation.git
+   cd "Smart Irrigation"
    ```
 2. **Install dependencies**
    ```bash
